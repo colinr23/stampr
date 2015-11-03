@@ -1,6 +1,6 @@
 # ---- roxygen documentation ----
 #
-#' @title Spatial temporal analysis of moving polygons Test fdafda
+#' @title Spatial temporal analysis of moving polygons
 #'
 #' @description
 #' This function generates a \code{SpatialPolygonsDataFrame} that can be used for spatial temporal analysis of moving polygons
