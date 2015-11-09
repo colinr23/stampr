@@ -9,5 +9,13 @@ Description: Perform spatial temporal analysis of moving polygons; a
     directional analysis, shape analysis, and some other simple functionality
     for examining spatial-temporal patterns of moving polygons.
 License: GPL-3
-Imports: sp, rgeos, rgdal, maptools, deldir, tripack, spdep
+Imports:
+    sp,
+    rgeos,
+    rgdal,
+    maptools,
+    deldir,
+    tripack,
+    spdep
 Packaged: 2015-07-02 11:48:03 UTC; jed long
+RoxygenNote: 5.0.0

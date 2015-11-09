@@ -14,6 +14,7 @@ Introduction to analysis of moving polygons in space-time using the `stampr` pac
 ```{r}
 library(stampr)
 library(sp)
+library(igraph)
 data('katrina')
 class(katrina)
 head(katrina@data)
@@ -30,16 +31,71 @@ plot(T2, col=NA, border="red", add=TRUE, lwd=2)
 
 The change we want to detect is the proportion of overlap, green only, and red only areas, representing stability, contraction and expansion events respectively.
 
-```{r}
+```{r tidy=TRUE}
 ch <- stamp(T1, T2, dc=0, direction=TRUE, distance=TRUE)
 stamp.map(ch)
 head(ch@data)
 ```
 
 ## Multiple time period polygon change analysis using overlay
-```{r}
+```{r tidy=TRUE}
 T3 <- katrina[3,]
 ch2 <- stamp(T2, T3, dc=0, direction=TRUE, distance=TRUE)
-head(ch@data)
+head(ch2@data)
 ```
 
+## Multiple time period polygon change analysis using overlay
+```{r tidy=TRUE}
+outEvents <- list()
+lSum <- 1
+for(i in 1:(nrow(katrina@data)-1)) {
+  Ti <- katrina[i,]
+  Ti_1 <- katrina[i+1,]
+  ch <- stamp(Ti, Ti_1, dc=0, direction=TRUE, distance=TRUE)
+  xx1 <- spChFIDs(ch, paste(i, "-", as.character((lSum):(lSum+length(ch)-1)), sep=""))
+  lSum <- length(ch) + lSum
+  outEvents[[i]] <- xx1 #@data
+} 
+
+outEvents <- do.call("rbind", outEvents)
+```
+
+## Get summaries from multiple change events
+```{r tidy=TRUE}
+grps <- row.names(outEvents) #get row names
+outEvents$TGROUP <- substr(grps, 1, as.numeric(unlist(lapply(strsplit(grps, ''), function(x) which(x == '-'))))-1) #extract time period to distinguish change time periods
+outEvents$STGROUP <- as.numeric(paste(outEvents$TGROUP,outEvents$GROUP, sep="")) #generate group ID for specific time periods
+
+```
+
+##Do some more graphing of the topological relationships
+```{r tidy=TRUE}
+outSTGroup <- stamp.stgroup.summary(outEvents)
+df <- data.frame(from=outEvents$ID1,to=outEvents$ID2, stg = outEvents$STGROUP)
+df <- df[complete.cases(df),]
+df <- merge(outSTGroup, df, by.x="STGROUP", by.y="stg")
+df$weight <- (df$aSTBL / df$AREA) * 10
+df <- data.frame(from=df$from,to=df$to, weight = df$weight)
+g <- graph_from_data_frame(df, directed = TRUE, vertices=df$ID1)
+E(g)$weight <- df$weight 
+plot(g, edge.width=E(g)$weight, layout=layout.fruchterman.reingold, edge.curved=TRUE, vertex.size=5, edge.arrow.mode='-')
+```
+
+Lets look at T=1:10, and T=11:20, and T=21:32 separately to see if we can see any changes in space-time structure...
+```{r tidy=TRUE}
+df2 <- df[1:10,]
+g <- graph_from_data_frame(df2, directed = TRUE, vertices=df2$ID1)
+E(g)$weight <- df2$weight
+plot(g, edge.width=E(g)$weight, layout=layout.fruchterman.reingold, edge.curved=TRUE, vertex.size=5, edge.arrow.mode='-')
+df2 <- df[11:20,]
+g <- graph_from_data_frame(df2, directed = TRUE, vertices=df2$ID1)
+E(g)$weight <- df2$weight
+plot(g, edge.width=E(g)$weight, layout=layout.fruchterman.reingold, edge.curved=TRUE, vertex.size=5, edge.arrow.mode='-')
+df2 <- df[21:32,]
+g <- graph_from_data_frame(df2, directed = TRUE, vertices=df2$ID1)
+E(g)$weight <- df2$weight
+plot(g, edge.width=E(g)$weight, layout=layout.fruchterman.reingold, edge.curved=TRUE, vertex.size=5, edge.arrow.mode='-')
+
+```
+
+##Space-time Graph Clustering
