@@ -41,7 +41,7 @@ stamp.map <- function(stmp,by="LEV1"){
       cols <- c("red","indianred1","darkorange","violetred","darkred","gray25","royalblue4","deepskyblue4","dodgerblue","skyblue","blue")
       }
     else if (by == "LEV4"){
-      stmp@data[,by] <- factor(stmp@data[,by],levels=c(NA,"UNION","DIVISION","BOTH"))
+      stmp@data[,by] <- factor(stmp@data[,by],levels=c('N/A',"UNION","DIVISION","BOTH"))
       cols <- c("grey","red","blue","purple")
       }
     else {

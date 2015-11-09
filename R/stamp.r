@@ -78,15 +78,18 @@ stamp <- function(T1, T2, dc=0, direction=FALSE, distance=FALSE, ...){
   dfD1 <- data.frame(ID1 = rep(NA,length(T1)),ID2 = rep(NA,length(T1)))
   #This is slow, can we improve?
   for (i in seq(along=res)) {
-    res[[i]] <- gDifference(T1[i,],T2,drop_lower_td=TRUE)
-    if (!is.null(res[[i]])){                                           #I think this may be problematic if there is the situation where T2 contains T1
+    gd <- gDifference(T1[i,],T2,drop_lower_td=TRUE)
+    res[[i]] <- gd 
+    if (!is.null(gd)){                                          
       row.names(res[[i]]) <- paste(i, row.names(res[[i]]), sep="_")    #I don't know what exactly this does?
       dfD1[i,1] <- as.numeric(row.names(T1[i,]))
     }
   }
   #Get rid of problem scenarios
   ind <- which(is.na(dfD1$ID1) & is.na(dfD1$ID2))
-  dfD1 <- dfD1[-ind,]
+  if (length(ind) > 0){
+    dfD1 <- dfD1[-ind,]
+  }
   
   res1 <- res[!sapply(res, is.null)]
   pD1 <- NULL
@@ -102,15 +105,19 @@ stamp <- function(T1, T2, dc=0, direction=FALSE, distance=FALSE, ...){
   dfD2 <- data.frame(ID1 = rep(NA,length(T2)),ID2 = rep(NA,length(T2)))
   #This is slow, can we improve?
   for (i in seq(along=res)) {
-    res[[i]] <- gDifference(T2[i,],T1,drop_lower_td=TRUE)
-    if (!is.null(res[[i]])){                                           #I think this may be problematic if there is the situation where T2 contains T1
+    gd <- gDifference(T2[i,],T1,drop_lower_td=TRUE)
+    res[[i]] <- gd
+    if (!is.null(gd)){                                          
       row.names(res[[i]]) <- paste(i, row.names(res[[i]]), sep="_")    #I don't know what exactly this does?
       dfD2[i,2] <- as.numeric(row.names(T2[i,]))
     }
   }
   #Get rid of problem scenarios
   ind <- which(is.na(dfD2$ID1) & is.na(dfD2$ID2))
-  dfD2 <- dfD2[-ind,]
+  if (length(ind) > 0){
+    dfD2 <- dfD2[-ind,]
+  }
+  
   
   res1 <- res[!sapply(res, is.null)]
   pD2 <- NULL
@@ -183,7 +190,7 @@ stamp <- function(T1, T2, dc=0, direction=FALSE, distance=FALSE, ...){
     stmp$TMP[which(stmp$TMP == grps[i])] <- i
     }
   #Label Groups with Multi-Stable events as union or division
-  stmp$LEV4 <- NA
+  stmp$LEV4 <- 'N/A'
   for (grp in unique(stmp$TMP)){
     ind <- which(stmp$TMP == grp & stmp$LEV3 == "STBL")
     ind.grp <- which(stmp$TMP == grp)

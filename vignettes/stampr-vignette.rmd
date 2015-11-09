@@ -1,0 +1,45 @@
+---
+title: "stampr analysis"
+author: "Colin Robertson"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+Introduction to analysis of moving polygons in space-time using the `stampr` package.
+
+```{r}
+library(stampr)
+library(sp)
+data('katrina')
+class(katrina)
+head(katrina@data)
+```
+
+## Simple two-time period change detection using overlay
+
+```{r tidy=TRUE}
+T1 <- katrina[1,]
+T2 <- katrina[2,]
+plot(T1, col=NA, border="green", lwd=2, xlim=c(min(c(bbox(T1)[1,1], bbox(T2)[1,1])), max(c(bbox(T1)[1,2], bbox(T2)[1,2]))), ylim=c(min(c(bbox(T1)[2,1], bbox(T2)[2,1])), max(c(bbox(T1)[2,2], bbox(T2)[2,2]))))
+plot(T2, col=NA, border="red", add=TRUE, lwd=2)
+```
+
+The change we want to detect is the proportion of overlap, green only, and red only areas, representing stability, contraction and expansion events respectively.
+
+```{r}
+ch <- stamp(T1, T2, dc=0, direction=TRUE, distance=TRUE)
+stamp.map(ch)
+head(ch@data)
+```
+
+## Multiple time period polygon change analysis using overlay
+```{r}
+T3 <- katrina[3,]
+ch2 <- stamp(T2, T3, dc=0, direction=TRUE, distance=TRUE)
+head(ch@data)
+```
+
