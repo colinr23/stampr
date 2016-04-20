@@ -41,6 +41,7 @@ stamp.multichange <- function(polys, changeByRow=TRUE, changeByField = FALSE, ch
     } 
   }
   if(changeByField == TRUE) {
+    polys$ID <- 1:(length(polys@data[,changeField]))
     for(i in 1:(length(unique(polys@data[,changeField]))-1)) {
       Ti <- subset(polys, polys@data[,changeField] == unique(sort(polys@data[,changeField]))[i])
       Ti_1 <- subset(polys, polys@data[,changeField] == unique(sort(polys@data[,changeField]))[i+1])

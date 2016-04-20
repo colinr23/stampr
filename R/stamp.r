@@ -64,8 +64,10 @@
 
 stamp <- function(T1, T2, dc=0, direction=FALSE, distance=FALSE, ...){ 
   # intersection b/w T1 and T2
-  row.names(T1) <- as.character(T1$ID)
-  row.names(T2) <- as.character(T2$ID)
+  T1$ID <- row.names(T1)
+  T2$ID <- row.names(T2)
+  row.names(T1) <- as.character(1:(length(T1))) #as.character(T1$ID)
+  row.names(T2) <- as.character(1:(length(T2))) #as.character(T2$ID)
   pI <- gIntersection(T1,T2,byid=TRUE,drop_lower_td=TRUE)
   if (!is.null(pI)){
     #this assumes row numbers are numeric
