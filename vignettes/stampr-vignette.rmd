@@ -25,6 +25,8 @@ head(katrina@data)
 ```{r tidy=TRUE}
 T1 <- katrina[1,]
 T2 <- katrina[2,]
+T1$ID <- T1$Id
+T2$ID <- T2$Id
 plot(T1, col=NA, border="green", lwd=2, xlim=c(min(c(bbox(T1)[1,1], bbox(T2)[1,1])), max(c(bbox(T1)[1,2], bbox(T2)[1,2]))), ylim=c(min(c(bbox(T1)[2,1], bbox(T2)[2,1])), max(c(bbox(T1)[2,2], bbox(T2)[2,2]))))
 plot(T2, col=NA, border="red", add=TRUE, lwd=2)
 ```
@@ -40,6 +42,7 @@ head(ch@data)
 ## Multiple time period polygon change analysis using overlay
 ```{r tidy=TRUE}
 T3 <- katrina[3,]
+T3$ID <- T3$Id
 ch2 <- stamp(T2, T3, dc=0, direction=TRUE, distance=TRUE)
 head(ch2@data)
 ```
@@ -48,6 +51,7 @@ head(ch2@data)
 ```{r tidy=TRUE}
 outEvents <- list()
 lSum <- 1
+katrina$ID <- katrina$Id
 for(i in 1:(nrow(katrina@data)-1)) {
   Ti <- katrina[i,]
   Ti_1 <- katrina[i+1,]
@@ -101,6 +105,7 @@ plot(g, edge.width=E(g)$weight, layout=layout.fruchterman.reingold, edge.curved=
 ##Space-time Graph Clustering
 ```{r}
 data('mpb')
+mpb$ID <- 1:nrow(mpb)
 T1 <- subset(mpb, as.numeric(TGROUP)==1)
 T2 <- subset(mpb, as.numeric(TGROUP)==2)
 ch <- stamp(T1, T2, dc=2500, direction=TRUE, distance=TRUE)
@@ -112,6 +117,7 @@ Lets try it out, getting multiple change events for katrina data when each row i
 ```{r}
 rm(list=ls()) #need to rerun code above to create function after this
 data("katrina")
+katrina$ID <- katrina$Id
 chng <- stamp.multichange(katrina, changeByRow = TRUE, stampArgs = list(0, TRUE, TRUE))
 outSTGroup <- stamp.stgroup.summary(chng)
 head(outSTGroup)
@@ -120,6 +126,7 @@ head(outSTGroup)
 Now lets try the multichange function on the `mpb` data:
 ```{r}
 data("mpb")
+mpb$ID <- nrow(mpb)
 chng <- stamp.multichange(mpb, changeByRow = FALSE, changeByField=TRUE, changeField = "TGROUP", stampArgs = list(2000, TRUE, TRUE))
 outSTGroup <- stamp.stgroup.summary(chng)
 head(outSTGroup)
@@ -139,8 +146,7 @@ vertNames <- rbind(fromIDs, toIDs)
 g <- graph_from_data_frame(df, directed = TRUE, vertices=unique(vertNames))
 
 E(g)$weight <- df$weight 
-#plot(g, edge.width=E(g)$weight, layout=layout.fruchterman.reingold, edge.curved=TRUE, vertex.size=5, edge.arrow.mode='-')
-
+#replace with function
 v_layers_df <- unique( rbind(
   expand.grid( ID = df$from[df$tg==1], Layer = 1),
   expand.grid( ID = df$to[df$tg==1], Layer = 2),
@@ -169,92 +175,7 @@ layout.k_partite <- function(g) {
   l
 }
 
-plot(g, layout = layout.k_partite(g))
-
-#tkplot(g, layout = layout.k_partite(g), vertex.color="grey")
-
-#plot(g, layout = layout.k_partite(g), vertex.size=2, edge.curved=TRUE, vertex.size=5, edge.arrow.mode='-', edge.width=E(g)$weight, vertex.label.cex = 0.5)
-
-#tkplot(g, layout = layout.k_partite(g), vertex.size=2, edge.curved=TRUE, vertex.size=5, edge.arrow.mode='-', edge.width=E(g)$weight, vertex.label.cex = 0.5)
-
-# library(RJSONIO) 
-# temp<-cbind(V(g)$name,V(g)$layer)
-# colnames(temp)<-c("name","group")
-# js1<-toJSON(temp)
-# write.graph(g,"edgelist.csv",format="edgelist")
-# edges<-read.csv("edgelist.csv",sep=" ",header=F)
-# colnames(edges)<-c("source","target")
-# edges<-as.matrix(edges)
-# js2<-toJSON(edges)
-# asn<-paste('{"nodes":',js1,',"links":',js2,'}',sep="")
-# write(asn,file="asn.json")
-# 
-# 
-# 
-# fired <- readOGR("C:/Users/crobertson/Dropbox/R/stamp/temp", "okanogan_complex_sp")
-# fired$ID <- 0:(length(fired)-1)
-# chng <- multiChange(fired, changeByRow = FALSE, changeByField=TRUE, changeField = "TIMEPERIOD", stampArgs = list(500, TRUE, TRUE))
-# outSTGroup <- stamp.stgroup.summary(chng)
-
-
-# v_layers_df <- unique( rbind(
-#   expand.grid( ID = df$from[df$tg==1], Layer = 1),
-#   expand.grid( ID = df$to[df$tg==1], Layer = 2),
-#   expand.grid( ID = df$from[df$tg==2], Layer = 2),
-#   expand.grid( ID = df$to[df$tg==2], Layer = 3),
-#   expand.grid( ID = df$from[df$tg==3], Layer = 3),
-#   expand.grid( ID = df$to[df$tg==3], Layer = 4),
-#   expand.grid( ID = df$from[df$tg==4], Layer = 4),
-#   expand.grid( ID = df$to[df$tg==4], Layer = 5),
-#   expand.grid( ID = df$from[df$tg==5], Layer = 5),
-#   expand.grid( ID = df$to[df$tg==5], Layer = 6),
-#   expand.grid( ID = df$from[df$tg==6], Layer = 6),
-#   expand.grid( ID = df$to[df$tg==6], Layer = 7),
-#   expand.grid( ID = df$from[df$tg==7], Layer = 7),
-#   expand.grid( ID = df$to[df$tg==7], Layer = 8),
-#   expand.grid( ID = df$from[df$tg==8], Layer = 8),
-#   expand.grid( ID = df$to[df$tg==8], Layer = 9),
-#   expand.grid( ID = df$from[df$tg==9], Layer = 9),
-#   expand.grid( ID = df$to[df$tg==9], Layer = 10),
-#   expand.grid( ID = df$from[df$tg==10], Layer = 10),
-#   expand.grid( ID = df$to[df$tg==10], Layer = 11),
-#   expand.grid( ID = df$from[df$tg==11], Layer = 11),
-#   expand.grid( ID = df$to[df$tg==11], Layer = 12),
-#   expand.grid( ID = df$from[df$tg==12], Layer = 12),
-#   expand.grid( ID = df$to[df$tg==12], Layer = 13),
-#   expand.grid( ID = df$from[df$tg==13], Layer = 13),
-#   expand.grid( ID = df$to[df$tg==13], Layer = 14),
-#   expand.grid( ID = df$from[df$tg==14], Layer = 14),
-#   expand.grid( ID = df$to[df$tg==14], Layer = 15),
-#   expand.grid( ID = df$from[df$tg==15], Layer = 15),
-#   expand.grid( ID = df$to[df$tg==15], Layer = 16),
-#   expand.grid( ID = df$from[df$tg==16], Layer = 16),
-#   expand.grid( ID = df$to[df$tg==16], Layer = 17),
-#   expand.grid( ID = df$from[df$tg==17], Layer = 17),
-#   expand.grid( ID = df$to[df$tg==17], Layer = 18),
-#   expand.grid( ID = df$from[df$tg==18], Layer = 18),
-#   expand.grid( ID = df$to[df$tg==18], Layer = 19),
-#   expand.grid( ID = df$from[df$tg==19], Layer = 19),
-#   expand.grid( ID = df$to[df$tg==19], Layer = 20),
-#   expand.grid( ID = df$from[df$tg==20], Layer = 20),
-#   expand.grid( ID = df$to[df$tg==20], Layer = 21),
-#   expand.grid( ID = df$from[df$tg==21], Layer = 21),
-#   expand.grid( ID = df$to[df$tg==21], Layer = 22),
-#   expand.grid( ID = df$from[df$tg==22], Layer = 22),
-#   expand.grid( ID = df$to[df$tg==22], Layer = 23),
-#   expand.grid( ID = df$from[df$tg==23], Layer = 23),
-#   expand.grid( ID = df$to[df$tg==23], Layer = 24),
-#   expand.grid( ID = df$from[df$tg==24], Layer = 24),
-#   expand.grid( ID = df$to[df$tg==24], Layer = 25),
-#   expand.grid( ID = df$from[df$tg==25], Layer = 25),
-#   expand.grid( ID = df$to[df$tg==25], Layer = 26),
-#   expand.grid( ID = df$from[df$tg==26], Layer = 26),
-#   expand.grid( ID = df$to[df$tg==26], Layer = 27),
-#   expand.grid( ID = df$from[df$tg==27], Layer = 27),
-#   expand.grid( ID = df$to[df$tg==27], Layer = 28),
-#   expand.grid( ID = df$from[df$tg==28], Layer = 28),
-#   expand.grid( ID = df$to[df$tg==28], Layer = 29)
-#   ))
-
+plot(g, layout = layout.k_partite(g), vertex.label=NA)
+plot(g)
 ```
 

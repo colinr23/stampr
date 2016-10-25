@@ -7,9 +7,9 @@
 stamp(T1, T2, dc = 0, direction = FALSE, distance = FALSE, ...)
 }
 \arguments{
-\item{T1}{a \code{SpatialPolygons} object of polygons from time 1.}
+\item{T1}{a \code{SpatialPolygonsDataFrame} object of polygons from time 1.}
 
-\item{T2}{a \code{SpatialPolygons} object of polygons from time 2.}
+\item{T2}{a \code{SpatialPolygonsDataFrame} object of polygons from time 2.}
 
 \item{dc}{spatial distance threshold for determining groupings (see \bold{Details}) in appropriate units.}
 
@@ -59,6 +59,8 @@ The \code{stamp} function can be used to perform spatial temporal analysis of mo
          value for LEV4. \cr
  See Robertson et al. (2007; especially Figure 1) for complete descriptions of all STAMP movement
  event types.
+ 
+ Note also that there must be a globally unique \code{ID} column in each data frame passed to the stamp function
 }
 \references{
 Robertson, C., Nelson, T., Boots, B., and Wulder, M. (2007) STAMP: Spatial-temporal analysis of moving polygons.

@@ -2,8 +2,8 @@ Package: stampr
 Type: Package
 Title: stampr: Spatial Temporal Analysis of Moving Polygons in R
 Version: 0.1
-Author: Jed Long
-Maintainer: Jed Long <jed.long@st-andrews.ac.uk>
+Author: Jed Long and Colin Robertson
+Maintainer: Colin Robertson <crobertson@wlu.ca>
 Description: Perform spatial temporal analysis of moving polygons; a
     longstanding analysis problem in GIS. The stampr package facilitates
     directional analysis, shape analysis, and some other simple functionality
@@ -18,4 +18,4 @@ Imports:
     tripack,
     spdep
 Packaged: 2015-07-02 11:48:03 UTC; jed long
-RoxygenNote: 5.0.0
+RoxygenNote: 5.0.1
