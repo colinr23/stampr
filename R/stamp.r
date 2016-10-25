@@ -26,9 +26,11 @@
 #'          value for LEV4. \cr
 #'  See Robertson et al. (2007; especially Figure 1) for complete descriptions of all STAMP movement
 #'  event types.
+#'  
+#'  Note also that there must be a globally unique \code{ID} column in each data frame passed to the stamp function
 #'
-#' @param T1 a \code{SpatialPolygons} object of polygons from time 1.
-#' @param T2 a \code{SpatialPolygons} object of polygons from time 2.
+#' @param T1 a \code{SpatialPolygonsDataFrame} object of polygons from time 1.
+#' @param T2 a \code{SpatialPolygonsDataFrame} object of polygons from time 2.
 #' @param dc spatial distance threshold for determining groupings (see \bold{Details}) in appropriate units.
 #' @param direction logical, whether or not to perform directional analysis. See documentation for
 #'    \code{stamp.direction} for further details.
@@ -64,10 +66,12 @@
 
 stamp <- function(T1, T2, dc=0, direction=FALSE, distance=FALSE, ...){ 
   # intersection b/w T1 and T2
-  #T1$ID <- row.names(T1)
-  #T2$ID <- row.names(T2)
-  #row.names(T1) <- as.character(1:(length(T1))) #as.character(T1$ID)
-  #row.names(T2) <- as.character(1:(length(T2))) #as.character(T2$ID)
+  if (!exists("ID", T1@data))
+      stop("Need a unique 'ID' column.")
+  
+  if (!exists("ID", T2@data))
+    stop("Need a unique 'ID' column.")
+  
   row.names(T1) <- as.character(T1$ID)
   row.names(T2) <- as.character(T2$ID)
   pI <- gIntersection(T1,T2,byid=TRUE,drop_lower_td=TRUE)
