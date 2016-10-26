@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<!-- saved from url=(0103)file:///C:/Users/crobertson/AppData/Local/Temp/Rtmp4K6wb5/preview-4c9869b72958.dir/stampr-vignette.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+<meta name="generator" content="pandoc">
+
+<meta name="author" content="Colin Robertson">
+
+<meta name="date" content="2016-04-20">
+
+<title>stampr analysis</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="./vignette_files/MathJax.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+
+<body><div id="MathJax_Message" style="display: none;"></div>
+
+
+
+<div id="header">
+<h1 class="title">stampr analysis</h1>
+<h4 class="author"><em>Colin Robertson</em></h4>
+<h4 class="date"><em>2016-04-20</em></h4>
+</div>
+
+
+<p>Introduction to analysis of moving polygons in space-time using the <code>stampr</code> package.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stampr)
+<span class="kw">library</span>(sp)
+<span class="kw">library</span>(igraph)</code></pre>
+<pre><code>## 
+## Attaching package: 'igraph'
+## 
+## The following objects are masked from 'package:stats':
+## 
+##     decompose, spectrum
+## 
+## The following object is masked from 'package:base':
+## 
+##     union</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">'katrina'</span>)
+<span class="kw">class</span>(katrina)</code></pre>
+<pre><code>## [1] "SpatialPolygonsDataFrame"
+## attr(,"package")
+## [1] "sp"</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(katrina@data)</code></pre>
+<pre><code>##   Id            DateTime
+## 0  0 2005-08-25 21:00:00
+## 1  1 2005-08-26 00:00:00
+## 2  2 2005-08-26 03:00:00
+## 3  3 2005-08-26 06:00:00
+## 4  4 2005-08-26 09:00:00
+## 5  5 2005-08-26 12:00:00</code></pre>
+<div id="simple-two-time-period-change-detection-using-overlay" class="section level2">
+<h2>Simple two-time period change detection using overlay</h2>
+<pre class="sourceCode r"><code class="sourceCode r">T1 &lt;-<span class="st"> </span>katrina[<span class="dv">1</span>, ]
+T2 &lt;-<span class="st"> </span>katrina[<span class="dv">2</span>, ]
+<span class="kw">plot</span>(T1, <span class="dt">col =</span> <span class="ot">NA</span>, <span class="dt">border =</span> <span class="st">"green"</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="kw">min</span>(<span class="kw">c</span>(<span class="kw">bbox</span>(T1)[<span class="dv">1</span>, <span class="dv">1</span>], 
+    <span class="kw">bbox</span>(T2)[<span class="dv">1</span>, <span class="dv">1</span>])), <span class="kw">max</span>(<span class="kw">c</span>(<span class="kw">bbox</span>(T1)[<span class="dv">1</span>, <span class="dv">2</span>], <span class="kw">bbox</span>(T2)[<span class="dv">1</span>, <span class="dv">2</span>]))), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(<span class="kw">c</span>(<span class="kw">bbox</span>(T1)[<span class="dv">2</span>, 
+    <span class="dv">1</span>], <span class="kw">bbox</span>(T2)[<span class="dv">2</span>, <span class="dv">1</span>])), <span class="kw">max</span>(<span class="kw">c</span>(<span class="kw">bbox</span>(T1)[<span class="dv">2</span>, <span class="dv">2</span>], <span class="kw">bbox</span>(T2)[<span class="dv">2</span>, <span class="dv">2</span>]))))
+<span class="kw">plot</span>(T2, <span class="dt">col =</span> <span class="ot">NA</span>, <span class="dt">border =</span> <span class="st">"red"</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAACVBMVEUA/wD/AAD///9BUmL4AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAE7klEQVR4nO3c7ZKaMBhAYfT+L7rdFVbkIwcIIa/hnB+dFhc2eRoUnZHuacm62gOInkCQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkEBQfKCuqzrG4EDdu1ojqPR7N/QHU5UoLNAUpZZQUKCFFVNpEcUEWrYQaGhNooZQQKDEqVRBKCTQscfK9HVAVw84JFCkJRQQKCl0+RKKCBTqJAsK9Pjf6oPXjuXS37axR9/yo9euoaBAz15p6dFr33LEBXoRLT5+d6BucImwhgICdd2bpb5QPKDu9zVs+NfqSXaVUDign5mPTq3qr2XRgPp54xK6TCgY0DBrfBZ6XnWaRQIaXR+OVCoLhQF6TBo/srrTBURBgF4or+nOgZJChUcWAmgQWZltVaEIQMOCWZ1r4r19caH6QO/Zr08VhEpOIgLQ8LfURKt9/FEbaDTv9EQTnxAVFaoMNJ40TXP9Y7R2gT6mu2GaS5dJG3c9WlWgz4lunOWSUaNA04WwfZozonJCFYEyT5QPokaBJhv2znLzK2BO9YDmr0f7J7nlIjOzmkDTLQcm+SdUbAlVA1q6oMkQahFovu3IJPGdbmZfDzSsxdaAznzL0AOVmUo9oIWNh4EKLqFgQBlCdwA6PMkbAR1fQrcAylhCpYQaAXoKhMd73ATouNAtgPKW0OHRJAoGlHE9fBegjCMWEQr1Xizvaq8toJMvpV9HFOjIITMTCGoLqIBQS0CdQOkEgloDOvFD137npoBO/VS63/kWQBkD6kq8jAUDylpCXYklJBAd9PQjbu3cj+1f+94AKGcJ3QXo6JB+v4l3fDxrRz39iFs7/UPX+wAdG1N3F6CjS+hnt6aAzj7HBErXCZSs97kJ0IFB9V/mzBrQ8oHPP+TWznyW7gRKNrsdwXnV/TLL8vYjQMkD5hTp2z5Du5+E5vdrOK/K3xdb3r7ze7olfWoDnSH097M3Atpzmo18mgNK/advBXpLFvGpD5R3a5fxTzUJBEI0uk+fJoHgeShJ9PlwGZ8QQOn7A60iTX0aBdpGNB/mZGMpnwhAaaHnG2na5zEKDS4CEBMtGU0PUGhoMYASNy7ZuvupwxkVBGjhbhP79j15NO/CAP30O9H9sy3pEwpo8Nk536I+gYB6mP9/7DvZyvoEA+pl1u6jtLJb0WHFAZrcpmwjUWmfUEDziCjjymBrsYGA6AKf8EAJoit4vgFo+Roy68J7T98ANH5ZG3fJr/4OoJ9q6Dy/CahSAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQf8ARN6Bq40aBuAAAAAASUVORK5CYII="></p>
+<p>The change we want to detect is the proportion of overlap, green only, and red only areas, representing stability, contraction and expansion events respectively.</p>
+<pre class="sourceCode r"><code class="sourceCode r">ch &lt;-<span class="st"> </span><span class="kw">stamp</span>(T1, T2, <span class="dt">dc =</span> <span class="dv">0</span>, <span class="dt">direction =</span> <span class="ot">TRUE</span>, <span class="dt">distance =</span> <span class="ot">TRUE</span>)
+<span class="kw">stamp.map</span>(ch)</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAaVBMVEUAAAAAADoAAGYAAP8AOpAAZrY6AAA6ADo6AGY6ZrY6kNtAQEBmAABmADpmZmZmkJBmtv+QOgCQOjqQOmaQkDqQtpCQ2/+2ZgC225C2/9u2///bkDrb////AAD/tmb/25D//7b//9v///+zsY5rAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAIvklEQVR4nO3d6XrbNhAFUNiq0lZKG7tL3CqNHfH9H7IkSEpcAAyWwap7f7SxvgTL8RAUKEoSHWKMyD2A0gMgIgAiAiAiACICICIAIgIgIgAiAiAiACICICIAIgIgIgAiAiAiACICICIAIgIgIgAiAiAiACICICIAIgIgIgAiAiAiACICICIAIgIgIjsgUWuSAbH3MOX7kHgzqRVollkkzu+7RiCh0Fko8XUkO+NtTt8uW0d6nJsRV1eyO87GTO0ydUTySCKevsYOGdsytsvTkQ0PbxFVBWRVPsxFVBGQAw+jUDVAbjx8QrUAufI8GJBz+fAJVQHkw8MlVAOQpw+PUAVA3j4sQgCieg9vwq5d744CfDiEAER1H9yCZbv+QHmFygfKLFQBUBjRQwAFrUOhe5ywf27fblhH+UqofaDAq2cPABRWRACieg4at0O7OYFChGoBWryKmlaoFqCzjL+R/xP5oHE7tMsC5G/UOJC4Aw1GKYVqBDqnvERdJZAfkd8IKgXyOs68hlAtkE8R+YyhXqBENVQDUF8rKqA0QhUADQ5KoCRCxQONS40ayEPI+dpH6UATgQYoQQ0VDnQDEMp1OoFQ2UCr6XMt1G6HWdFA69mzlZBTEZUMtJ07Wwm5CBUMtL+Vnq+E7A+zcoH2E+cEsi6iYoEU82Z7MuQi1ACQv5DNmIoEur9ZKyqQlVB5QD3L4XAYMdZIOiB/IQuiooCkx+Fw8znflYTuqXQYEL0SFQQ02Wx9pIDWJrpQOUB3nj0QmXhChQAJEeQTKGQaWxFAK530QMYiKgFow+PjE0+oAKCtjx9QmFDBQNvDyxvI7/VWUigzkILH1yeQSPsL5FQxtavsSMETAhR0nGkksgIpfYKAQopIU+PcMrp2FR2pfcKAQraudhNhCg2kWn44gM7e9+qpV4EYOkqP7c8annCgEal2IL0PC5BfHSnXyVaBJBKDUB4g7frDC3TeX5WsA8jEwwo0K9kLcd624w1k9mEHOs8XJb1q6DGAFkyuQhmACJ+IQqNS6UCkT1wgkmh7un08IGLZzg1E+8QHOpvKKDOQhU8SIP2zyLxANj6JgLQHmjBPJCqQlU8yIU0VAYgQApCTUFIgS5+UQKrTGYAoImGaSEQgW5/EQPvjrHig1EKmEkoIZO9TUgkBaBQSACKEdCUEIKVQDiAHn/xCACKEcgC5+GQBUgsBCEBeQgAihEoHKkcIQBqhLRD3l0eFAmUX2gFphgkgB6Afn/uSOnXdxydZXM+Xj0/9T93HL5fxkecLI1BuIQ+gj08vA9JpEJkfGUwGIPnI20//tQM0C9kDXV9PXbfgkH/+67R45PZ41UCbEqKA7kv1ffoLoH//vMQCyl1CzhX0fjuApjXoOIi8HxeH2HHhUS/QJOQH9CbE09dFBV2uf3y9LdKnpUfFQKOQM9DE8uO3FVD38etUQXINbwNICvku0lug7u3LdIi9P31tBWgh5HSaPw1MTxug4Vwf4zRfGpDmLy7neH2VS/O8SIuX0eXbDPTj832VZgAq4xhzAXJJ5UCDkDPQVEBT/Tz9Lf/frzvLpz8GoOqOMWeg4WnO9XU4isa1R7q8P1+aBLoJ2QP1p6+VzbTuLE5qDwl032qMxSOzrKBjtEMsq49HBcmrHccF0LgWnRoF6oVcgUajzRr08XO0Q6xGIAmyXoM+v1gCVXNNcZ66K9C7vGB4fX3xXKRruWx/n7sj0PV12El8G/6zAOp/bhXovAb6rsxqnm/9miy3W4tF+vnS7a91PCqQSx4Q6FYoQ/3M+9Zuc5WjLSDhBjQcV/OLGvdtx/X19+MWoxGgswfQtPdabTv+sVyk67h/IRRoPK0vth3fjt3bZoFuB0jQQNuXffrnQcMfbtuOoZbeF1cSHw5oW0ETUDdvOwac/tk0gFTPnPtthzybzeczAHXzIn3bdtx2rG0CHYTnaf627ZheTN0v0+0BkTdQjU8U563quO0YT/fzRrZpIO6ogNyEAAQgAEUFKkBIDDdIAQhArQLlFwIQgAAU2SfgvQYJgHILpQeqrITKB8p9gweAqgfKexfeAUAAah4o673SAGoBKOObog4AKg+oJiEAWfkACEBhPgCifMoHyvNxXQACEIsPgFoAyvDBpYu+EwPVUUIAsvZJD1SB0Mon7e0vVQCtBgigNoCSfo/E2gdAJp8sQGUfYwJAZp9tvwCifDIAlSu0G1hFQGm+ta4QoFKFlD71APW7osQ++YA8hSJ//6qiv9qAYgqphpQPqDwh5YAyApUmpPepDSiOkHo0WYEChPiJTD7ZgPyFuItI99lhuYFChDiJdMMQunEnAwoQYiwi7SAKAAoS4iHSfzSfMIw7GVCIEAeR6ZMLywAKEgomMnUuzONOBhQmFERk/OBLQY07GVCg0PC1Fvw8q7vKcgOFCnkRUR+bWhSQz+co741ckMgOhdW4A2MPFF5EI5IljsXvozggFqHxW3YIG6uONttqbhldu8aOwg+zpdJOytpm71MIECPRVsrFZvyHTuP2jivQQMRs5BX3cXvGq6P8RIotNYeGaq5+HTkfEbF9SgMa/2o2pUqAOqYTP4dPmUDl1E+ZQKvblNNhaa43eBMQk/TuaCkitg8k9ykPaHsT5fahxD5VACUQ0t9QXwVQdCHTpQb3udvN07cjoRp3ZCDjlQbXmdvO07sj5WcRe+89Q30KBLJomxfJPLIagWRzbETUdRjecevbZe+Ip47I94PVCyQbDX5NxH0iXENP1FEYkcWgagcKIrK6iBdr2Kk66ryJ7N6O2gKQF5Htu3XbAHI+p9m/mbkVINmFLZHLe71bArIkcnsrfFtA9KtrwvWTAloD6gzLkXDW6ZoEkr2ttv277ylyaYl5ZNp2dd+uVHxSASHrAIgIgIgAiAiAiACICICIAIgIgIgAiAiAiACICICIAIgIgIgAiAiAiACICICIAIgIgIgAiAiAiACICICIAIgIgIgAiAiAiACICICIAIgIgIj8D7TNklkGwkJxAAAAAElFTkSuQmCC"></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(ch@data)</code></pre>
+<pre><code>##   ID1 ID2 LEV1 LEV2 LEV3 LEV4 GROUP        AREA    CENDIR  CENDIST
+## 0   1  NA DISA CONT CONT  N/A     1  4962070798   4.79028 64497.83
+## 1   1   1 STBL STBL STBL  N/A     1 17555946174 184.79028 18229.88
+## 2  NA   1 GENR EXPN EXPN  N/A     1 11203050305 222.57639 72247.35</code></pre>
+</div>
+<div id="multiple-time-period-polygon-change-analysis-using-overlay" class="section level2">
+<h2>Multiple time period polygon change analysis using overlay</h2>
+<pre class="sourceCode r"><code class="sourceCode r">T3 &lt;-<span class="st"> </span>katrina[<span class="dv">3</span>, ]
+ch2 &lt;-<span class="st"> </span><span class="kw">stamp</span>(T2, T3, <span class="dt">dc =</span> <span class="dv">0</span>, <span class="dt">direction =</span> <span class="ot">TRUE</span>, <span class="dt">distance =</span> <span class="ot">TRUE</span>)
+<span class="kw">head</span>(ch2@data)</code></pre>
+<pre><code>##   ID1 ID2 LEV1 LEV2 LEV3 LEV4 GROUP        AREA    CENDIR   CENDIST
+## 0   1  NA DISA CONT CONT  N/A     1 11380288226  26.73386  40083.40
+## 1   1   1 STBL STBL STBL  N/A     1 17378708253 206.73386  26248.25
+## 2  NA   1 GENR EXPN EXPN  N/A     1 10942651871 231.35732 101808.65</code></pre>
+</div>
+<div id="multiple-time-period-polygon-change-analysis-using-overlay-1" class="section level2">
+<h2>Multiple time period polygon change analysis using overlay</h2>
+<pre class="sourceCode r"><code class="sourceCode r">outEvents &lt;-<span class="st"> </span><span class="kw">list</span>()
+lSum &lt;-<span class="st"> </span><span class="dv">1</span>
+for (i in <span class="dv">1</span>:(<span class="kw">nrow</span>(katrina@data) -<span class="st"> </span><span class="dv">1</span>)) {
+    Ti &lt;-<span class="st"> </span>katrina[i, ]
+    Ti_1 &lt;-<span class="st"> </span>katrina[i +<span class="st"> </span><span class="dv">1</span>, ]
+    ch &lt;-<span class="st"> </span><span class="kw">stamp</span>(Ti, Ti_1, <span class="dt">dc =</span> <span class="dv">0</span>, <span class="dt">direction =</span> <span class="ot">TRUE</span>, <span class="dt">distance =</span> <span class="ot">TRUE</span>)
+    xx1 &lt;-<span class="st"> </span><span class="kw">spChFIDs</span>(ch, <span class="kw">paste</span>(i, <span class="st">"-"</span>, <span class="kw">as.character</span>((lSum):(lSum +<span class="st"> </span><span class="kw">length</span>(ch) -<span class="st"> </span>
+<span class="st">        </span><span class="dv">1</span>)), <span class="dt">sep =</span> <span class="st">""</span>))
+    lSum &lt;-<span class="st"> </span><span class="kw">length</span>(ch) +<span class="st"> </span>lSum
+    outEvents[[i]] &lt;-<span class="st"> </span>xx1  <span class="co">#@data</span>
+}
+
+outEvents &lt;-<span class="st"> </span><span class="kw">do.call</span>(<span class="st">"rbind"</span>, outEvents)</code></pre>
+</div>
+<div id="get-summaries-from-multiple-change-events" class="section level2">
+<h2>Get summaries from multiple change events</h2>
+<pre class="sourceCode r"><code class="sourceCode r">grps &lt;-<span class="st"> </span><span class="kw">row.names</span>(outEvents)  <span class="co">#get row names</span>
+outEvents$TGROUP &lt;-<span class="st"> </span><span class="kw">substr</span>(grps, <span class="dv">1</span>, <span class="kw">as.numeric</span>(<span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="kw">strsplit</span>(grps, 
+    <span class="st">""</span>), function(x) <span class="kw">which</span>(x ==<span class="st"> "-"</span>)))) -<span class="st"> </span><span class="dv">1</span>)  <span class="co">#extract time period to distinguish change time periods</span>
+outEvents$STGROUP &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">paste</span>(outEvents$TGROUP, outEvents$GROUP, <span class="dt">sep =</span> <span class="st">""</span>))  <span class="co">#generate group ID for specific time periods</span>
+outSTGroup &lt;-<span class="st"> </span><span class="kw">stamp.stgroup.summary</span>(outEvents)
+<span class="kw">head</span>(outSTGroup)</code></pre>
+<pre><code>##   STGROUP nEVENTS         AREA nCONV nCONC nCONT nDISP1 nDISA nSTBL nEXPN
+## 1      11       3  33721067276     0     0     1      0     0     1     1
+## 2      21       3  39701648350     0     0     1      0     0     1     1
+## 3      31       3  37586522910     0     0     1      0     0     1     1
+## 4      41       3  67472954921     0     0     1      0     0     1     1
+## 5      51       3 107975540054     0     0     1      0     0     1     1
+## 6      61       3 112036033057     0     0     1      0     0     1     1
+##   nFRAG nDIVR nDISP2 nGENA aCONV aCONC       aCONT aDISP1 aDISA
+## 1     0     0      0     0     0     0  4962070798      0     0
+## 2     0     0      0     0     0     0 11380288226      0     0
+## 3     0     0      0     0     0     0 13307530739      0     0
+## 4     0     0      0     0     0     0  1320338249      0     0
+## 5     0     0      0     0     0     0 11840390904      0     0
+## 6     0     0      0     0     0     0 10405856472      0     0
+##         aSTBL       aEXPN aFRAG aDIVR aDISP2 aGENA
+## 1 17555946174 11203050305     0     0      0     0
+## 2 17378708253 10942651871     0     0      0     0
+## 3 15013829385  9265162785     0     0      0     0
+## 4 22958653921 43193962751     0     0      0     0
+## 5 54312225768 41822923382     0     0      0     0
+## 6 85729292679 15900883906     0     0      0     0</code></pre>
+</div>
+<div id="do-some-more-graphing-of-the-topological-relationships" class="section level2">
+<h2>Do some more graphing of the topological relationships</h2>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">from =</span> outEvents$ID1, <span class="dt">to =</span> outEvents$ID2, <span class="dt">stg =</span> outEvents$STGROUP)
+df &lt;-<span class="st"> </span>df[<span class="kw">complete.cases</span>(df), ]
+df &lt;-<span class="st"> </span><span class="kw">merge</span>(outSTGroup, df, <span class="dt">by.x =</span> <span class="st">"STGROUP"</span>, <span class="dt">by.y =</span> <span class="st">"stg"</span>)
+df$weight &lt;-<span class="st"> </span>(df$aSTBL/df$AREA) *<span class="st"> </span><span class="dv">10</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">from =</span> df$from, <span class="dt">to =</span> df$to, <span class="dt">weight =</span> df$weight)
+g &lt;-<span class="st"> </span><span class="kw">graph_from_data_frame</span>(df, <span class="dt">directed =</span> <span class="ot">TRUE</span>, <span class="dt">vertices =</span> df$ID1)
+<span class="kw">E</span>(g)$weight &lt;-<span class="st"> </span>df$weight
+<span class="kw">plot</span>(g, <span class="dt">edge.width =</span> <span class="kw">E</span>(g)$weight, <span class="dt">layout =</span> layout.fruchterman.reingold, <span class="dt">edge.curved =</span> <span class="ot">TRUE</span>, 
+    <span class="dt">vertex.size =</span> <span class="dv">5</span>, <span class="dt">edge.arrow.mode =</span> <span class="st">"-"</span>)</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAPFBMVEUAAAAAAE4AAHcAAIsAAJ8AJE4AJpsAOsdmAIuQOouQ2/+RX5GRqampqam2ZovbkJ/b/////9r//+3///8Co3N7AAAACXBIWXMAAA7DAAAOwwHHb6hkAAACj0lEQVR4nO3YS07DQBBAQUOAAMF8739XdiyiyC/ZzBip6gLderKtGS8/bFpmL7B3AgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFCYGWtd13vCrTQq0/pkz/3ozAq1nJqxwvcGBvl+Ob+d99l1obKCv58PThUB7LjT6FTsJtO10J9Cm+8dFoC2eoOAbFAQKH5cCDd7hJqMDvR8//1Wf8QfFw8Pr2WVj6AY387sjCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAo/AL3RgaJlekv8AAAAABJRU5ErkJggg=="></p>
+<p>Lets look at T=1:10, and T=11:20, and T=21:32 separately to see if we can see any changes in space-time structure…</p>
+<pre class="sourceCode r"><code class="sourceCode r">df2 &lt;-<span class="st"> </span>df[<span class="dv">1</span>:<span class="dv">10</span>, ]
+g &lt;-<span class="st"> </span><span class="kw">graph_from_data_frame</span>(df2, <span class="dt">directed =</span> <span class="ot">TRUE</span>, <span class="dt">vertices =</span> df2$ID1)
+<span class="kw">E</span>(g)$weight &lt;-<span class="st"> </span>df2$weight
+<span class="kw">plot</span>(g, <span class="dt">edge.width =</span> <span class="kw">E</span>(g)$weight, <span class="dt">layout =</span> layout.fruchterman.reingold, <span class="dt">edge.curved =</span> <span class="ot">TRUE</span>, 
+    <span class="dt">vertex.size =</span> <span class="dv">5</span>, <span class="dt">edge.arrow.mode =</span> <span class="st">"-"</span>)</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAPFBMVEUAAAAAAE4AAHcAAIsAAJ8AJE4AJpsAOsdmAIuQOouQ2/+RX5GRqampqam2ZovbkJ/b/////9r//+3///8Co3N7AAAACXBIWXMAAA7DAAAOwwHHb6hkAAACj0lEQVR4nO3YS07DQBBAQUOAAMF8739XdiyiyC/ZzBip6gLderKtGS8/bFpmL7B3AgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFCYGWtd13vCrTQq0/pkz/3ozAq1nJqxwvcGBvl+Ob+d99l1obKCv58PThUB7LjT6FTsJtO10J9Cm+8dFoC2eoOAbFAQKH5cCDd7hJqMDvR8//1Wf8QfFw8Pr2WVj6AY387sjCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAo/AL3RgaJlekv8AAAAABJRU5ErkJggg=="></p>
+<pre class="sourceCode r"><code class="sourceCode r">df2 &lt;-<span class="st"> </span>df[<span class="dv">11</span>:<span class="dv">20</span>, ]
+g &lt;-<span class="st"> </span><span class="kw">graph_from_data_frame</span>(df2, <span class="dt">directed =</span> <span class="ot">TRUE</span>, <span class="dt">vertices =</span> df2$ID1)
+<span class="kw">E</span>(g)$weight &lt;-<span class="st"> </span>df2$weight
+<span class="kw">plot</span>(g, <span class="dt">edge.width =</span> <span class="kw">E</span>(g)$weight, <span class="dt">layout =</span> layout.fruchterman.reingold, <span class="dt">edge.curved =</span> <span class="ot">TRUE</span>, 
+    <span class="dt">vertex.size =</span> <span class="dv">5</span>, <span class="dt">edge.arrow.mode =</span> <span class="st">"-"</span>)</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAPFBMVEUAAAAAAE4AAHcAAIsAAJ8AJE4AJpsAOsdmAIuQOouQ2/+RX5GRqampqam2ZovbkJ/b/////9r//+3///8Co3N7AAAACXBIWXMAAA7DAAAOwwHHb6hkAAACj0lEQVR4nO3YS07DQBBAQUOAAMF8739XdiyiyC/ZzBip6gLderKtGS8/bFpmL7B3AgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFCYGWtd13vCrTQq0/pkz/3ozAq1nJqxwvcGBvl+Ob+d99l1obKCv58PThUB7LjT6FTsJtO10J9Cm+8dFoC2eoOAbFAQKH5cCDd7hJqMDvR8//1Wf8QfFw8Pr2WVj6AY387sjCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAo/AL3RgaJlekv8AAAAABJRU5ErkJggg=="></p>
+<pre class="sourceCode r"><code class="sourceCode r">df2 &lt;-<span class="st"> </span>df[<span class="dv">21</span>:<span class="dv">32</span>, ]
+g &lt;-<span class="st"> </span><span class="kw">graph_from_data_frame</span>(df2, <span class="dt">directed =</span> <span class="ot">TRUE</span>, <span class="dt">vertices =</span> df2$ID1)
+<span class="kw">E</span>(g)$weight &lt;-<span class="st"> </span>df2$weight
+<span class="kw">plot</span>(g, <span class="dt">edge.width =</span> <span class="kw">E</span>(g)$weight, <span class="dt">layout =</span> layout.fruchterman.reingold, <span class="dt">edge.curved =</span> <span class="ot">TRUE</span>, 
+    <span class="dt">vertex.size =</span> <span class="dv">5</span>, <span class="dt">edge.arrow.mode =</span> <span class="st">"-"</span>)</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAPFBMVEUAAAAAAE4AAHcAAIsAAJ8AJE4AJpsAOsdmAIuQOouQ2/+RX5GRqampqam2ZovbkJ/b/////9r//+3///8Co3N7AAAACXBIWXMAAA7DAAAOwwHHb6hkAAACj0lEQVR4nO3YS07DQBBAQUOAAMF8739XdiyiyC/ZzBip6gLderKtGS8/bFpmL7B3AgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFAQKAgWBgkBBoCBQECgIFCYGWtd13vCrTQq0/pkz/3ozAq1nJqxwvcGBvl+Ob+d99l1obKCv58PThUB7LjT6FTsJtO10J9Cm+8dFoC2eoOAbFAQKH5cCDd7hJqMDvR8//1Wf8QfFw8Pr2WVj6AY387sjCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAo/AL3RgaJlekv8AAAAABJRU5ErkJggg=="></p>
+</div>
+<div id="space-time-graph-clustering" class="section level2">
+<h2>Space-time Graph Clustering</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">'mpb'</span>)
+T1 &lt;-<span class="st"> </span><span class="kw">subset</span>(mpb, <span class="kw">as.numeric</span>(TGROUP)==<span class="dv">1</span>)
+T2 &lt;-<span class="st"> </span><span class="kw">subset</span>(mpb, <span class="kw">as.numeric</span>(TGROUP)==<span class="dv">2</span>)
+ch &lt;-<span class="st"> </span><span class="kw">stamp</span>(T1, T2, <span class="dt">dc=</span><span class="dv">2500</span>, <span class="dt">direction=</span><span class="ot">TRUE</span>, <span class="dt">distance=</span><span class="ot">TRUE</span>)</code></pre>
+<p>Lets try it out, getting multiple change events for katrina data when each row is a polygon at a separate time period</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>()) <span class="co">#need to rerun code above to create function after this</span>
+<span class="kw">data</span>(<span class="st">"katrina"</span>)
+chng &lt;-<span class="st"> </span><span class="kw">stamp.multichange</span>(katrina, <span class="dt">changeByRow =</span> <span class="ot">TRUE</span>, <span class="dt">stampArgs =</span> <span class="kw">list</span>(<span class="dv">0</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>))
+outSTGroup &lt;-<span class="st"> </span><span class="kw">stamp.stgroup.summary</span>(chng)
+<span class="kw">head</span>(outSTGroup)</code></pre>
+<pre><code>##   STGROUP nEVENTS         AREA nCONV nCONC nCONT nDISP1 nDISA nSTBL nEXPN
+## 1      11       3  33721067276     0     0     1      0     0     1     1
+## 2      21       3  39701648350     0     0     1      0     0     1     1
+## 3      31       3  37586522910     0     0     1      0     0     1     1
+## 4      41       3  67472954921     0     0     1      0     0     1     1
+## 5      51       3 107975540054     0     0     1      0     0     1     1
+## 6      61       3 112036033057     0     0     1      0     0     1     1
+##   nFRAG nDIVR nDISP2 nGENA aCONV aCONC       aCONT aDISP1 aDISA
+## 1     0     0      0     0     0     0  4962070798      0     0
+## 2     0     0      0     0     0     0 11380288226      0     0
+## 3     0     0      0     0     0     0 13307530739      0     0
+## 4     0     0      0     0     0     0  1320338249      0     0
+## 5     0     0      0     0     0     0 11840390904      0     0
+## 6     0     0      0     0     0     0 10405856472      0     0
+##         aSTBL       aEXPN aFRAG aDIVR aDISP2 aGENA
+## 1 17555946174 11203050305     0     0      0     0
+## 2 17378708253 10942651871     0     0      0     0
+## 3 15013829385  9265162785     0     0      0     0
+## 4 22958653921 43193962751     0     0      0     0
+## 5 54312225768 41822923382     0     0      0     0
+## 6 85729292679 15900883906     0     0      0     0</code></pre>
+<p>Now lets try the multichange function on the <code>mpb</code> data:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">"mpb"</span>)
+chng &lt;-<span class="st"> </span><span class="kw">stamp.multichange</span>(mpb, <span class="dt">changeByRow =</span> <span class="ot">FALSE</span>, <span class="dt">changeByField=</span><span class="ot">TRUE</span>, <span class="dt">changeField =</span> <span class="st">"TGROUP"</span>, <span class="dt">stampArgs =</span> <span class="kw">list</span>(<span class="dv">2000</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>))
+outSTGroup &lt;-<span class="st"> </span><span class="kw">stamp.stgroup.summary</span>(chng)
+<span class="kw">head</span>(outSTGroup)</code></pre>
+<pre><code>##   STGROUP nEVENTS     AREA nCONV nCONC nCONT nDISP1 nDISA nSTBL nEXPN
+## 1      11       1   740000     0     0     0      0     1     0     0
+## 2      12       2  8810000     0     0     0      1     0     0     0
+## 3      13       1 10880000     0     0     0      0     1     0     0
+## 4      14       1  6880000     0     0     0      0     1     0     0
+## 5      15       3  8515000     0     0     1      0     0     1     1
+## 6      16       3  7906267     0     0     1      0     0     1     1
+##   nFRAG nDIVR nDISP2 nGENA aCONV aCONC      aCONT  aDISP1    aDISA   aSTBL
+## 1     0     0      0     0     0     0      0.000       0   740000       0
+## 2     0     0      1     0     0     0      0.000 4615000        0       0
+## 3     0     0      0     0     0     0      0.000       0 10880000       0
+## 4     0     0      0     0     0     0      0.000       0  6880000       0
+## 5     0     0      0     0     0     0 745000.000       0        0 1190000
+## 6     0     0      0     0     0     0   1266.667       0        0 4658733
+##     aEXPN aFRAG aDIVR  aDISP2 aGENA
+## 1       0     0     0       0     0
+## 2       0     0     0 4195000     0
+## 3       0     0     0       0     0
+## 4       0     0     0       0     0
+## 5 6580000     0     0       0     0
+## 6 3246267     0     0       0     0</code></pre>
+<p>Now lets try our previous s-t topology graphing with the more complex <code>mpb</code> dataset</p>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">from=</span>chng$ID1,<span class="dt">to=</span>chng$ID2, <span class="dt">stg =</span> chng$STGROUP, <span class="dt">tg=</span>chng$TGROUP)
+df &lt;-<span class="st"> </span>df[<span class="kw">complete.cases</span>(df),]
+df &lt;-<span class="st"> </span><span class="kw">merge</span>(outSTGroup, df, <span class="dt">by.x=</span><span class="st">"STGROUP"</span>, <span class="dt">by.y=</span><span class="st">"stg"</span>)
+df$weight &lt;-<span class="st"> </span>(df$aSTBL /<span class="st"> </span>df$AREA) *<span class="st"> </span><span class="dv">10</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">from=</span>df$from,<span class="dt">to=</span>df$to, <span class="dt">weight =</span> df$weight, <span class="dt">tg =</span> df$tg)
+fromIDs &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">names=</span><span class="kw">as.character</span>(<span class="kw">unique</span>(df$from)))
+toIDs &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">names=</span><span class="kw">as.character</span>(<span class="kw">unique</span>(df$to)))
+vertNames &lt;-<span class="st"> </span><span class="kw">rbind</span>(fromIDs, toIDs)
+
+g &lt;-<span class="st"> </span><span class="kw">graph_from_data_frame</span>(df, <span class="dt">directed =</span> <span class="ot">TRUE</span>, <span class="dt">vertices=</span><span class="kw">unique</span>(vertNames))
+
+<span class="kw">E</span>(g)$weight &lt;-<span class="st"> </span>df$weight 
+<span class="co">#plot(g, edge.width=E(g)$weight, layout=layout.fruchterman.reingold, edge.curved=TRUE, vertex.size=5, edge.arrow.mode='-')</span>
+
+v_layers_df &lt;-<span class="st"> </span><span class="kw">unique</span>( <span class="kw">rbind</span>(
+  <span class="kw">expand.grid</span>( <span class="dt">ID =</span> df$from[df$tg==<span class="dv">1</span>], <span class="dt">Layer =</span> <span class="dv">1</span>),
+  <span class="kw">expand.grid</span>( <span class="dt">ID =</span> df$to[df$tg==<span class="dv">1</span>], <span class="dt">Layer =</span> <span class="dv">2</span>),
+  <span class="kw">expand.grid</span>( <span class="dt">ID =</span> df$from[df$tg==<span class="dv">2</span>], <span class="dt">Layer =</span> <span class="dv">2</span>),
+  <span class="kw">expand.grid</span>( <span class="dt">ID =</span> df$to[df$tg==<span class="dv">2</span>], <span class="dt">Layer =</span> <span class="dv">3</span>),
+  <span class="kw">expand.grid</span>( <span class="dt">ID =</span> df$from[df$tg==<span class="dv">3</span>], <span class="dt">Layer =</span> <span class="dv">3</span>),
+  <span class="kw">expand.grid</span>( <span class="dt">ID =</span> df$to[df$tg==<span class="dv">3</span>], <span class="dt">Layer =</span> <span class="dv">4</span>),
+  <span class="kw">expand.grid</span>( <span class="dt">ID =</span> df$from[df$tg==<span class="dv">4</span>], <span class="dt">Layer =</span> <span class="dv">4</span>),
+  <span class="kw">expand.grid</span>( <span class="dt">ID =</span> df$to[df$tg==<span class="dv">4</span>], <span class="dt">Layer =</span> <span class="dv">5</span>),
+  <span class="kw">expand.grid</span>( <span class="dt">ID =</span> df$from[df$tg==<span class="dv">5</span>], <span class="dt">Layer =</span> <span class="dv">5</span>),
+  <span class="kw">expand.grid</span>( <span class="dt">ID =</span> df$to[df$tg==<span class="dv">5</span>], <span class="dt">Layer =</span> <span class="dv">6</span>),
+  <span class="kw">expand.grid</span>( <span class="dt">ID =</span> df$from[df$tg==<span class="dv">6</span>], <span class="dt">Layer =</span> <span class="dv">6</span>),
+  <span class="kw">expand.grid</span>( <span class="dt">ID =</span> df$to[df$tg==<span class="dv">6</span>], <span class="dt">Layer =</span> <span class="dv">7</span>),
+  <span class="kw">expand.grid</span>( <span class="dt">ID =</span> df$from[df$tg==<span class="dv">7</span>], <span class="dt">Layer =</span> <span class="dv">7</span>),
+  <span class="kw">expand.grid</span>( <span class="dt">ID =</span> df$to[df$tg==<span class="dv">7</span>], <span class="dt">Layer =</span> <span class="dv">8</span>)
+  ))
+
+v_layers &lt;-<span class="st"> </span><span class="kw">setNames</span>( v_layers_df$Layer, v_layers_df$ID)
+<span class="kw">V</span>(g)$layer &lt;-<span class="st"> </span>v_layers[<span class="kw">V</span>(g)$name]
+
+
+layout.k_partite &lt;-<span class="st"> </span>function(g) {
+  l &lt;-<span class="st"> </span><span class="kw">layout.sugiyama</span>(g)$layout[,<span class="dv">2</span>:<span class="dv">1</span>]
+  l[,<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">V</span>(g)$layer
+  l[,<span class="dv">2</span>] &lt;-<span class="st"> </span>-<span class="st"> </span>l[,<span class="dv">2</span>] +<span class="st"> </span><span class="dv">1</span> +<span class="st"> </span><span class="kw">max</span>(l[,<span class="dv">2</span>])
+  l
+}
+
+<span class="kw">plot</span>(g, <span class="dt">layout =</span> <span class="kw">layout.k_partite</span>(g))</code></pre>
+<p><img src="data:image/png;base64,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"></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#tkplot(g, layout = layout.k_partite(g), vertex.color="grey")</span>
+
+<span class="co">#plot(g, layout = layout.k_partite(g), vertex.size=2, edge.curved=TRUE, vertex.size=5, edge.arrow.mode='-', edge.width=E(g)$weight, vertex.label.cex = 0.5)</span>
+
+<span class="co">#tkplot(g, layout = layout.k_partite(g), vertex.size=2, edge.curved=TRUE, vertex.size=5, edge.arrow.mode='-', edge.width=E(g)$weight, vertex.label.cex = 0.5)</span>
+
+<span class="co"># library(RJSONIO) </span>
+<span class="co"># temp&lt;-cbind(V(g)$name,V(g)$layer)</span>
+<span class="co"># colnames(temp)&lt;-c("name","group")</span>
+<span class="co"># js1&lt;-toJSON(temp)</span>
+<span class="co"># write.graph(g,"edgelist.csv",format="edgelist")</span>
+<span class="co"># edges&lt;-read.csv("edgelist.csv",sep=" ",header=F)</span>
+<span class="co"># colnames(edges)&lt;-c("source","target")</span>
+<span class="co"># edges&lt;-as.matrix(edges)</span>
+<span class="co"># js2&lt;-toJSON(edges)</span>
+<span class="co"># asn&lt;-paste('{"nodes":',js1,',"links":',js2,'}',sep="")</span>
+<span class="co"># write(asn,file="asn.json")</span>
+<span class="co"># </span>
+<span class="co"># </span>
+<span class="co"># </span>
+<span class="co"># fired &lt;- readOGR("C:/Users/crobertson/Dropbox/R/stamp/temp", "okanogan_complex_sp")</span>
+<span class="co"># fired$ID &lt;- 0:(length(fired)-1)</span>
+<span class="co"># chng &lt;- multiChange(fired, changeByRow = FALSE, changeByField=TRUE, changeField = "TIMEPERIOD", stampArgs = list(500, TRUE, TRUE))</span>
+<span class="co"># outSTGroup &lt;- stamp.stgroup.summary(chng)</span>
+
+
+<span class="co"># v_layers_df &lt;- unique( rbind(</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==1], Layer = 1),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==1], Layer = 2),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==2], Layer = 2),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==2], Layer = 3),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==3], Layer = 3),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==3], Layer = 4),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==4], Layer = 4),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==4], Layer = 5),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==5], Layer = 5),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==5], Layer = 6),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==6], Layer = 6),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==6], Layer = 7),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==7], Layer = 7),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==7], Layer = 8),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==8], Layer = 8),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==8], Layer = 9),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==9], Layer = 9),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==9], Layer = 10),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==10], Layer = 10),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==10], Layer = 11),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==11], Layer = 11),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==11], Layer = 12),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==12], Layer = 12),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==12], Layer = 13),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==13], Layer = 13),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==13], Layer = 14),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==14], Layer = 14),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==14], Layer = 15),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==15], Layer = 15),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==15], Layer = 16),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==16], Layer = 16),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==16], Layer = 17),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==17], Layer = 17),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==17], Layer = 18),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==18], Layer = 18),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==18], Layer = 19),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==19], Layer = 19),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==19], Layer = 20),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==20], Layer = 20),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==20], Layer = 21),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==21], Layer = 21),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==21], Layer = 22),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==22], Layer = 22),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==22], Layer = 23),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==23], Layer = 23),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==23], Layer = 24),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==24], Layer = 24),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==24], Layer = 25),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==25], Layer = 25),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==25], Layer = 26),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==26], Layer = 26),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==26], Layer = 27),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==27], Layer = 27),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==27], Layer = 28),</span>
+<span class="co">#   expand.grid( ID = df$from[df$tg==28], Layer = 28),</span>
+<span class="co">#   expand.grid( ID = df$to[df$tg==28], Layer = 29)</span>
+<span class="co">#   ))</span></code></pre>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+
+
+</body></html>
