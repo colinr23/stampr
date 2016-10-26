@@ -48,6 +48,7 @@ head(ch2@data)
 ```
 
 ## Multiple time period polygon change analysis using overlay
+Here is a brute force way to run the `stamp` function over multiple time periods using a loop;
 ```{r tidy=TRUE}
 outEvents <- list()
 lSum <- 1
@@ -123,7 +124,7 @@ outSTGroup <- stamp.stgroup.summary(chng)
 head(outSTGroup)
 ```
 
-Now lets try the multichange function on the `mpb` data:
+Now lets try the `stamp.multichange` function on the `mpb` data and a sumary function `stamp.stgroup.summary` :
 ```{r}
 data("mpb")
 mpb$ID <- nrow(mpb)
@@ -132,7 +133,7 @@ outSTGroup <- stamp.stgroup.summary(chng)
 head(outSTGroup)
 ```
 
-Now lets try our previous s-t topology graphing with the more complex `mpb` dataset
+Lets try our previous s-t topology graphing with the more complex `mpb` dataset
 ```{r}
 df <- data.frame(from=chng$ID1,to=chng$ID2, stg = chng$STGROUP, tg=chng$TGROUP)
 df <- df[complete.cases(df),]
