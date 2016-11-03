@@ -26,7 +26,7 @@
 #
 # ---- End of roxygen documentation ----
 
-stamp.map <- function(stmp,by="LEV1"){
+stamp.map <- function(stmp,by="LEV1", ...){
   if (by %in% colnames(stmp@data)){
     if (by == "LEV1"){
       stmp@data[,by] <- factor(stmp@data[,by],levels=c("DISA","STBL","GENR"))
@@ -48,7 +48,7 @@ stamp.map <- function(stmp,by="LEV1"){
       stmp@data[,by] <- factor(stmp@data[,by])
       cols <- rainbow(length(unique(stmp@data[,by])))
       }
-    spplot(stmp,zcol=by,col.regions=cols)
+    spplot(stmp,zcol=by,col.regions=cols, ...)
     }
   else {stop(paste("The column ",by," does not exist.",sep=""))}
   }
