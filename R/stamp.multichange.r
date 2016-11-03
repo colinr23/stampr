@@ -41,11 +41,11 @@ stamp.multichange <- function(polys, changeByRow=TRUE, changeByField = FALSE, ch
     } 
   }
   if(changeByField == TRUE) {
-    polys$ID <- 1:(length(polys@data[,changeField]))
+    #polys$ID <- 1:(length(polys@data[,changeField]))
     for(i in 1:(length(unique(polys@data[,changeField]))-1)) {
       Ti <- subset(polys, polys@data[,changeField] == unique(sort(polys@data[,changeField]))[i])
       Ti_1 <- subset(polys, polys@data[,changeField] == unique(sort(polys@data[,changeField]))[i+1])
-      ch <- stamp(Ti, Ti_1, dc=stampArgs[[1]], direction=stampArgs[[2]], distance=stampArgs[[3]])
+      ch <- stamp(Ti, Ti_1, dc=stampArgs[[1]], direction=stampArgs[[2]], dir.mode=stampArgs[[3]], ndir=stampArgs[[4]],  distance=stampArgs[[5]])
       xx1 <- spChFIDs(ch, paste(i, "-", as.character((lSum):(lSum+length(ch)-1)), sep=""))
       lSum <- length(ch) + lSum
       outEvents[[i]] <- xx1 #@data
