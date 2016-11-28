@@ -4,7 +4,7 @@
 \alias{stamp.map}
 \title{Mapping (plotting) functionality for \code{stamp} output}
 \usage{
-stamp.map(stmp, by = "LEV1")
+stamp.map(stmp, by = "LEV1", ...)
 }
 \arguments{
 \item{stmp}{output from the \code{stamp} function, i.e., a (\code{SpatialPolygonsDataFrame}).}

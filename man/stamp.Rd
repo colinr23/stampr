@@ -4,7 +4,8 @@
 \alias{stamp}
 \title{Spatial temporal analysis of moving polygons}
 \usage{
-stamp(T1, T2, dc = 0, direction = FALSE, distance = FALSE, ...)
+stamp(T1, T2, dc = 0, direction = FALSE, distance = FALSE,
+  shape = FALSE, ...)
 }
 \arguments{
 \item{T1}{a \code{SpatialPolygonsDataFrame} object of polygons from time 1.}

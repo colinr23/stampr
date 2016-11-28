@@ -64,7 +64,7 @@
 #
 # ---- End of Documentation ----
 
-stamp <- function(T1, T2, dc=0, direction=FALSE, distance=FALSE, ...){ 
+stamp <- function(T1, T2, dc=0, direction=FALSE, distance=FALSE, shape=FALSE, ...){ 
   # intersection b/w T1 and T2
   if (!exists("ID", T1@data))
       stop("Need a unique 'ID' column.")
@@ -154,7 +154,7 @@ stamp <- function(T1, T2, dc=0, direction=FALSE, distance=FALSE, ...){
   id.stab2 <- unique(stmp$ID2[which(stmp$LEV1 == "STBL")])
   stmp$LEV2[which(stmp$LEV1 == "GENR" & stmp$ID2 %in% id.stab2)] <- "EXPN"
 
-#Delineate contiguous bases for groups
+  #Delineate contiguous bases for groups
   nbl <- poly2nb(stmp)
   for(i in 1:length(stmp)) {
     nbl[[i]] <- c(unlist(nbl[i]), i)
@@ -228,7 +228,7 @@ stamp <- function(T1, T2, dc=0, direction=FALSE, distance=FALSE, ...){
   #distance analysis
   if (distance==TRUE){stmp <- stamp.distance(stmp,...)}
   #Shape analysis
-  #if (shape==TRUE){stmp <- stamp.shape(stmp,...)}
+  if (shape==TRUE){stmp <- stamp.shape(stmp,...)}
 
   #output
   return(stmp)
