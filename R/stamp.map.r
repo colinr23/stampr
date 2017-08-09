@@ -15,6 +15,7 @@
 #' @param stmp output from the \code{stamp} function, i.e., a (\code{SpatialPolygonsDataFrame}).
 #' @param by tells the function which attribute to visualize, one of \code{"LEV1"},
 #'           \code{"LEV2"}, \code{"LEV3"}, \code{"LEV4"}, or \code{"GROUP"}
+#' @param ... additional parameters to be passed to the plot function
 #'
 #' @return
 #'   \code{stamp.map} returns a map of the \code{stamp} output using the \code{spplot} functionality. 
@@ -22,6 +23,16 @@
 #'
 #' @keywords stamp plot
 #' @seealso stamp
+#' data("fire1")
+#' data("fire2")
+#' fire1$ID <- 1:nrow(fire1) 
+#' fire2$ID <- (max(fire1$ID)+1):(max(fire1$ID) + nrow(fire2))
+#' ch <- stamp(fire1, fire2, dc=1, direction=FALSE, distance=FALSE)
+#' stamp.map(ch, "LEV1") 
+#' stamp.map(ch, "LEV2") 
+#' stamp.map(ch, "LEV3") 
+#' stamp.map(ch, "LEV4")
+#' 
 #' @export
 #
 # ---- End of roxygen documentation ----

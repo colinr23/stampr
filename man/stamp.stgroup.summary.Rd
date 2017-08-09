@@ -26,5 +26,14 @@ The function \code{stamp.stgroup.summary} compiles summary statistics for each S
  both \code{area} and \code{count} are set to \code{FALSE}, \code{stamp.group.summary} returns a
  \code{data.frame} with just the stgroup IDs as the only column.
 }
+\examples{
+library(sp)
+data("katrina")
+katrina$ID <- katrina$Id
+ch <- stamp.multichange(katrina, changeByRow = TRUE, dc = 0, distance = TRUE, direction = FALSE)
+STGroup <- stamp.stgroup.summary(ch)
+head(STGroup)
+
+}
 \keyword{stamp}
 

@@ -5,7 +5,7 @@
 \title{run stamp function for multiple years of polygons at once}
 \usage{
 stamp.multichange(polys, changeByRow = TRUE, changeByField = FALSE,
-  changeField = "", stampArgs = list())
+  changeField = "", ...)
 }
 \arguments{
 \item{polys}{a \code{SpatialPolygonsDataFrame} wiht 2+ years of data to run through the \code{stamp} function.}
@@ -16,7 +16,7 @@ stamp.multichange(polys, changeByRow = TRUE, changeByField = FALSE,
 
 \item{changeField}{string, name of the field which contains time period if changeByField is TRUE}
 
-\item{stampArgs}{list, list of paramater values to provide to the \code{stamp} function}
+\item{...}{list of paramater values to provide to the \code{stamp} function}
 }
 \value{
 A \code{SpatialPolygonsDataFrame} which includes all outputs from the calls to the \code{stamp} function. If there are T time periods,
@@ -30,6 +30,14 @@ The function \code{stamp.multichange} is a wrapper function that makes multiple 
 \code{stamp.multichange} is a simple wrapper function for the \code{stamp} function. The two options for data structure
  are those in the \code{katrina} data, where each time period is a row, and rows are time-ordered, and the structure of 
  the \code{mpb} data, where time period is specified by a column. Time periods should be ordered from 1 through T.
+}
+\examples{
+library(sp)
+data("katrina")
+katrina$ID <- katrina$Id
+ch <- stamp.multichange(katrina, changeByRow = TRUE, dc = 0, distance = TRUE, direction = FALSE)
+STGroup <- stamp.stgroup.summary(ch)
+head(STGroup)
 }
 \keyword{stamp}
 

@@ -10,7 +10,7 @@
 #'  \code{glob.change} computes three change metrics, detailed below, that can be used to quantify changes
 #'  between two polygon sets:
 #'  \cr\cr
-#'  \code{NumRatio} -- ratio between the number of polygons in T2 and T1;
+#'  \code{NumRatio} -- ratio between the number of polygons in \code{T2} and \code{T1};
 #'  \deqn{\mathtt{NumRatio} = \frac{\#(T1)}{\#(T2)}}{NumRatio=#T1/#T2}
 #'  \cr
 #'  \code{AreaRatio} -- ratio between the areas of polygons in T2 and T1;
@@ -19,13 +19,14 @@
 #'  \code{AvgAreaRatio} -- ratio between the \code{AreaRatio} and \code{NumRatio};
 #'  \deqn{\mathtt{AvgAreaRatio} = \frac{\mathtt{AreaRatio}}{\mathtt{NumRatio}} = \frac{\frac{A(T2)}{A(T1)}}{\frac{\#(T1)}{\#(T2)}}}{AvgAreaRatio=AreaRatio/NumRatio}
 #'
-#'  @param T1 a \code{SpatialPolygons(DataFrame)} object containing the T1 polygons for change analysis.
-#'  @param T2 same as T1 but for T2.
+#' @param T1 a \code{SpatialPolygonsDataFrame} object of polygons from time 1.
+#' @param T2 a \code{SpatialPolygonsDataFrame} object of polygons from time 2.
+
 #'
 #' @return
-#'  Results for the \code{NumRatio}, \code{AreaRatio}, and \code{AvgAreaRatio} metrics.
+#'  A \code{list} object with three elements - Results for the \code{NumRatio}, \code{AreaRatio}, and \code{AvgAreaRatio} metrics.
 #'
-#' @keywords stamp
+#' @keywords metrics
 #' @export
 # ---- End of roxygen documentation ----
 

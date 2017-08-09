@@ -5,3 +5,4 @@ stampr 0.1
              -  Added argument 'drop_lower_td=TRUE' to calls to gIntersection and gDifference.
 
 * 13-05-2014 -  Changed FRAC, SHPI shape indexes to proper vector formulae.
+* 13-12-2016 -  Upgrade for JSS submissiona and CRAN. Documentation fixes.

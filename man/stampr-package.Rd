@@ -3,7 +3,7 @@
 \docType{package}
 \name{stampr-package}
 \alias{stampr-package}
-\title{stampr: Spatial Temporal Analysis of Moving Polygons in R}
+\title{stampr: Spatial Temporal Analysis of Moving Polygons}
 \description{
 The Package \code{stampr} provides tools for performing spatial temporal analysis of moving polygons.
 These tools allow the calculation of directional relationships, shape indices, and other basic
@@ -17,7 +17,7 @@ geographic information science, but hopefully \code{stampr} can provide users wi
 platform for new developments and applied research looking at interesting geographical phenomena.
 }
 \author{
-Jed Long
+Jed Long and Colin Robertson
 }
 \references{
 Robertson, C., Nelson, T., Boots, B., and Wulder, M. (2007) STAMP: Spatial-temporal analysis of moving polygons.

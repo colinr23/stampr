@@ -60,6 +60,18 @@
 #'
 #' @keywords stamp
 #' @seealso stamp 
+#' @examples
+#' library(sp)
+#' library(rgeos)
+#' library(raster)
+#' data("fire1")
+#' data("fire2")
+#' #set globally unique ID column required for stamp function
+#' fire1$ID <- 1:nrow(fire1) 
+#' #set globally unique ID column required for stamp function
+#' fire2$ID <- (max(fire1$ID)+1):(max(fire1$ID) + nrow(fire2)) 
+#' ch <- stamp(fire1, fire2, dc=1, direction=FALSE, distance=FALSE)
+#' ch.sh <- stamp.shape(T1 = fire1, T2 = fire2, stmp = ch, index = 'LIN')
 #' @export
 #
 # ---- End of roxygen documentation ----
@@ -82,9 +94,13 @@ stamp.shape <- function(T1,T2,stmp,index='PAR'){
     ch <- gSimplify(ch,tol=tol)
     coords <- ch@polygons[[1]]@Polygons[[1]]@coords
     coords <- coords[which(!duplicated(coords)),]
-    circ <- circumcircle(coords[,1],coords[,2],num.touch=2)   #SLOW
-    Acirc <- (circ$radius^2)*pi
-    1 - (gArea(pol)/Acirc)
+    f <- function(p) { max(pointDistance(rbind(p), coords, lonlat=FALSE)) }
+    p <- optim(colMeans(coords), f)
+    cc <- buffer(SpatialPoints(rbind(p$par)), width=p$value, quadsegs=45)
+    #circ <- circumcircle(coords[,1],coords[,2],num.touch=2)   #SLOW
+    #Acirc <- (circ$radius^2)*pi
+    #circum function from https://stat.ethz.ch/pipermail/r-sig-geo/2016-August/024773.html
+    1 - (gArea(pol)/gArea(cc))
   }
   
   #switch function for computing shape metrics
@@ -104,10 +120,10 @@ stamp.shape <- function(T1,T2,stmp,index='PAR'){
   for (i in grps){
     stmp. <- stmp[which(stmp$GROUP==i),]
     t1.ind <- unique(stmp.$ID1)[which(!is.na(unique(stmp.$ID1)))]
-    t1.ind <- which(row.names(T1) %in% t1.ind)
+    t1.ind <- which(T1$ID %in% t1.ind)
     
     t2.ind <- unique(stmp.$ID2)[which(!is.na(unique(stmp.$ID2)))]
-    t2.ind <- which(row.names(T2) %in% t2.ind)
+    t2.ind <- which(T2$ID %in% t2.ind)
     
     if (length(t1.ind) > 0){ t1.[i] <- shape.fun(T1[t1.ind,],index) }
     if (length(t2.ind) > 0){ t2.[i] <- shape.fun(T2[t2.ind,],index) }

@@ -64,7 +64,7 @@
 #
 # ---- End of Documentation ----
 
-stamp <- function(T1, T2, dc=0, direction=FALSE, distance=FALSE, shape=FALSE, ...){ 
+stamp <- function(T1, T2, dc=0, direction=FALSE, distance=FALSE, ...){ 
   # intersection b/w T1 and T2
   if (!exists("ID", T1@data))
       stop("Need a unique 'ID' column.")
@@ -227,8 +227,6 @@ stamp <- function(T1, T2, dc=0, direction=FALSE, distance=FALSE, shape=FALSE, ..
   if (direction==TRUE){stmp <- stamp.direction(stmp,...)}
   #distance analysis
   if (distance==TRUE){stmp <- stamp.distance(stmp,...)}
-  #Shape analysis
-  if (shape==TRUE){stmp <- stamp.shape(stmp,...)}
 
   #output
   return(stmp)

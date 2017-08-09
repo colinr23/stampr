@@ -11,6 +11,8 @@ stamp.map(stmp, by = "LEV1", ...)
 
 \item{by}{tells the function which attribute to visualize, one of \code{"LEV1"},
 \code{"LEV2"}, \code{"LEV3"}, \code{"LEV4"}, or \code{"GROUP"}}
+
+\item{...}{additional parameters to be passed to the plot function}
 }
 \value{
 \code{stamp.map} returns a map of the \code{stamp} output using the \code{spplot} functionality. 
@@ -28,6 +30,15 @@ The \code{stamp.map} function can be used to visualize any of the stamp event de
 }
 \seealso{
 stamp
+data("fire1")
+data("fire2")
+fire1$ID <- 1:nrow(fire1) 
+fire2$ID <- (max(fire1$ID)+1):(max(fire1$ID) + nrow(fire2))
+ch <- stamp(fire1, fire2, dc=1, direction=FALSE, distance=FALSE)
+stamp.map(ch, "LEV1") 
+stamp.map(ch, "LEV2") 
+stamp.map(ch, "LEV3") 
+stamp.map(ch, "LEV4")
 }
 \keyword{plot}
 \keyword{stamp}

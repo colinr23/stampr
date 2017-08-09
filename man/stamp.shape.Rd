@@ -59,6 +59,19 @@ The \code{stamp.shape} function can be used to perform polygon shape analysis on
  STAMP events containing multiple polygons, as the calculation for the circumscribing circle will include all
  polygon objects within the group and artificially increase the LIN scores.
 }
+\examples{
+library(sp)
+library(rgeos)
+library(raster)
+data("fire1")
+data("fire2")
+#set globally unique ID column required for stamp function
+fire1$ID <- 1:nrow(fire1) 
+#set globally unique ID column required for stamp function
+fire2$ID <- (max(fire1$ID)+1):(max(fire1$ID) + nrow(fire2)) 
+ch <- stamp(fire1, fire2, dc=1, direction=FALSE, distance=FALSE)
+ch.sh <- stamp.shape(T1 = fire1, T2 = fire2, stmp = ch, index = 'LIN')
+}
 \references{
 Baker, W.L. and Cai, Y. (1992) The r.le programs for multiscale analysis of landscape structure using
    the GRASS geographical information system. \emph{Landscape Ecology}, 7(4):291-302. \cr\cr
