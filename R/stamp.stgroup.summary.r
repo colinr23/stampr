@@ -20,6 +20,14 @@
 #'  A \code{data.frame} where rows are stamp groups and columns correspond to the STAMP event types (ID, areas, and counts).
 #'
 #' @keywords stamp
+#' @examples
+#' library(sp)
+#' data("katrina")
+#' katrina$ID <- katrina$Id
+#' ch <- stamp.multichange(katrina, changeByRow = TRUE, dc = 0, distance = TRUE, direction = FALSE)
+#' STGroup <- stamp.stgroup.summary(ch)
+#' head(STGroup)
+#' 
 #' @export
 
 #
@@ -33,6 +41,7 @@ stamp.stgroup.summary <- function(stmp,area=TRUE,count=TRUE){
       ind1 <- which(stmp$STGROUP == grps[i])
       outdf$nEVENTS[i] <- length(ind1)
       outdf$AREA[i] <- sum(stmp$AREA[ind1])
+      outdf$TGROUP[i] <- min(stmp$TGROUP[ind1])
       }
   if (count==TRUE){
     nevnts <- paste("n",evnts,sep="")
