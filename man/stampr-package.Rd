@@ -22,5 +22,7 @@ Jed Long and Colin Robertson
 \references{
 Robertson, C., Nelson, T., Boots, B., and Wulder, M. (2007) STAMP: Spatial-temporal analysis of moving polygons.
  \emph{Journal of Geographical Systems}, 9:207-227.
+Long, J., Robertson, C., and Nelson, T. (2018) stampr: Spatial-temporal analysis of moving polygons in R.
+ \emph{Journal of Statistical Software}, 84:1.
 }
 

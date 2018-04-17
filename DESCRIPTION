@@ -4,7 +4,10 @@ Title: Spatial Temporal Analysis of Moving Polygons
 Version: 0.1
 Author: Jed Long and Colin Robertson
 Maintainer: Colin Robertson <crobertson@wlu.ca>
-Description: Perform spatial temporal analysis of moving polygons; a longstanding analysis problem in Geographic Information Systems. Facilitates directional analysis, shape analysis, and some other simple functionality for examining spatial-temporal patterns of moving polygons.
+Description: Perform spatial temporal analysis of moving polygons; a
+    longstanding analysis problem in Geographic Information Systems. Facilitates
+    directional analysis, shape analysis, and some other simple functionality for
+    examining spatial-temporal patterns of moving polygons.
 Depends:
     R (>= 2.10)
 License: GPL-3
@@ -20,4 +23,4 @@ Imports:
     methods
 Suggests:
     igraph
-RoxygenNote: 5.0.1
+RoxygenNote: 5.0.0
